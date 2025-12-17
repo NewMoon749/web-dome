@@ -420,14 +420,7 @@ export default function VideoCallModal({
                   Cerrar
                 </button>
                 <button
-                  onClick={() => {
-                    if (callType === 'now') {
-                      alert('Iniciando videollamada...');
-                    } else {
-                      alert(`¡Cita confirmada para el ${selectedDate?.toLocaleDateString('es-ES')} a las ${selectedTime}!`);
-                    }
-                    onClose();
-                  }}
+                  onClick={onClose}
                   className="flex-1 bg-wine text-white px-6 py-3 rounded-lg font-semibold hover:bg-wine-dark transition-all"
                 >
                   {callType === 'now' ? 'Iniciar Videollamada' : 'Confirmar Cita'}
