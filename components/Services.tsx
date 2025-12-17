@@ -2,6 +2,7 @@
 
 import { Briefcase, Users, Copyright, Info, DollarSign } from 'lucide-react';
 import { useState } from 'react';
+import VideoCallModal from './VideoCallModal';
 
 interface Service {
   id: string;
@@ -15,6 +16,8 @@ interface Service {
 
 export default function Services() {
   const [selectedService, setSelectedService] = useState<Service | null>(null);
+  const [showVideoModal, setShowVideoModal] = useState(false);
+  const [selectedServiceArea, setSelectedServiceArea] = useState('');
 
   const services: Service[] = [
     {
@@ -129,8 +132,9 @@ export default function Services() {
                 </button>
                 <button
                   onClick={() => {
+                    setSelectedServiceArea(selectedService.name);
                     setSelectedService(null);
-                    // Aquí se podría abrir el modal de videollamada
+                    setShowVideoModal(true);
                   }}
                   className="flex-1 bg-wine text-white px-6 py-3 rounded-lg font-semibold hover:bg-wine-dark transition-all"
                 >
@@ -139,6 +143,20 @@ export default function Services() {
               </div>
             </div>
           </div>
+        )}
+
+        {/* Modal de Videollamada */}
+        {showVideoModal && (
+          <VideoCallModal
+            isOpen={showVideoModal}
+            onClose={() => {
+              setShowVideoModal(false);
+              setSelectedServiceArea('');
+            }}
+            duration="30"
+            type="service"
+            serviceArea={selectedServiceArea}
+          />
         )}
       </div>
     </section>
