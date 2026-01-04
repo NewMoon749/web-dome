@@ -27,18 +27,6 @@ export default function Chatbot() {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
 
-  // Escuchar evento para abrir el chatbot desde otros componentes
-  useEffect(() => {
-    const handleOpenChatbot = () => {
-      setIsOpen(true);
-    };
-
-    window.addEventListener('openChatbot', handleOpenChatbot);
-    return () => {
-      window.removeEventListener('openChatbot', handleOpenChatbot);
-    };
-  }, []);
-
   const handleSend = () => {
     if (!input.trim()) return;
 

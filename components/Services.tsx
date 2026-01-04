@@ -2,6 +2,7 @@
 
 import { Briefcase, Users, Copyright, Info, DollarSign } from 'lucide-react';
 import { useState } from 'react';
+import PaymentModal from './PaymentModal';
 import VideoCallModal from './VideoCallModal';
 
 interface Service {
@@ -16,8 +17,9 @@ interface Service {
 
 export default function Services() {
   const [selectedService, setSelectedService] = useState<Service | null>(null);
-  const [showVideoModal, setShowVideoModal] = useState(false);
-  const [selectedServiceArea, setSelectedServiceArea] = useState('');
+  const [showPaymentModal, setShowPaymentModal] = useState(false);
+  const [showVideoCallModal, setShowVideoCallModal] = useState(false);
+  const [serviceForPayment, setServiceForPayment] = useState<Service | null>(null);
 
   const services: Service[] = [
     {
@@ -81,7 +83,7 @@ export default function Services() {
               <p className="text-gray-600 mb-6">{service.description}</p>
               <div className="flex items-center gap-2 mb-6">
                 <DollarSign className="text-wine" size={20} />
-                <span className="font-semibold text-wine">{service.priceRange}</span>
+                <span className="font-semibold text-wine">{service.priceRange} USD</span>
               </div>
               <button
                 onClick={() => setSelectedService(service)}
@@ -106,7 +108,7 @@ export default function Services() {
                   <div className="flex items-center gap-2 mb-4">
                     <DollarSign className="text-wine" size={20} />
                     <span className="font-semibold text-wine text-lg">
-                      {selectedService.priceRange}
+                      {selectedService.priceRange} USD
                     </span>
                   </div>
                 </div>
@@ -132,9 +134,9 @@ export default function Services() {
                 </button>
                 <button
                   onClick={() => {
-                    setSelectedServiceArea(selectedService.name);
+                    setServiceForPayment(selectedService);
                     setSelectedService(null);
-                    setShowVideoModal(true);
+                    setShowPaymentModal(true);
                   }}
                   className="flex-1 bg-wine text-white px-6 py-3 rounded-lg font-semibold hover:bg-wine-dark transition-all"
                 >
@@ -145,17 +147,40 @@ export default function Services() {
           </div>
         )}
 
-        {/* Modal de Videollamada */}
-        {showVideoModal && (
-          <VideoCallModal
-            isOpen={showVideoModal}
+        {/* Modal de Pago */}
+        {showPaymentModal && serviceForPayment && !showVideoCallModal && (
+          <PaymentModal
+            isOpen={showPaymentModal}
             onClose={() => {
-              setShowVideoModal(false);
-              setSelectedServiceArea('');
+              setShowPaymentModal(false);
+              setServiceForPayment(null);
+              setShowVideoCallModal(false);
             }}
-            duration="30"
+            service={serviceForPayment}
+            duration="90"
             type="service"
-            serviceArea={selectedServiceArea}
+            onPaymentComplete={() => {
+              setShowPaymentModal(false);
+              // Pequeño delay para asegurar que el modal de pago se cierre primero
+              setTimeout(() => {
+                setShowVideoCallModal(true);
+              }, 100);
+            }}
+          />
+        )}
+
+        {/* Modal de Videollamada - Se abre SOLO después del pago completo */}
+        {showVideoCallModal && serviceForPayment && !showPaymentModal && (
+          <VideoCallModal
+            isOpen={showVideoCallModal}
+            onClose={() => {
+              setShowVideoCallModal(false);
+              setServiceForPayment(null);
+              setShowPaymentModal(false);
+            }}
+            duration="90"
+            type="service"
+            serviceArea={serviceForPayment.name}
           />
         )}
       </div>

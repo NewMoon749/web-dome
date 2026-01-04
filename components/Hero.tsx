@@ -5,6 +5,7 @@ import { useState } from 'react';
 import Image from 'next/image';
 
 export default function Hero() {
+  const [showChatbot, setShowChatbot] = useState(false);
   const [imageError, setImageError] = useState(false);
 
   const scrollToSection = (id: string) => {
@@ -12,11 +13,6 @@ export default function Hero() {
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
     }
-  };
-
-  const openChatbot = () => {
-    // Dispara un evento personalizado para abrir el chatbot
-    window.dispatchEvent(new CustomEvent('openChatbot'));
   };
 
   return (
@@ -64,7 +60,7 @@ export default function Hero() {
             Ver Servicios
           </button>
           <button
-            onClick={openChatbot}
+            onClick={() => setShowChatbot(true)}
             className="bg-wine-light text-white px-8 py-3 rounded-lg font-semibold hover:bg-wine-dark transition-all transform hover:scale-105 shadow-lg flex items-center gap-2"
           >
             <MessageCircle size={20} />
