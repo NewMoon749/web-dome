@@ -1,6 +1,6 @@
 'use client';
 
-import { Briefcase, Users, Copyright, Info, DollarSign } from 'lucide-react';
+import { Briefcase, Users, Copyright, Info, DollarSign, Building2 } from 'lucide-react';
 import { useState } from 'react';
 import PaymentModal from './PaymentModal';
 import VideoCallModal from './VideoCallModal';
@@ -49,6 +49,15 @@ export default function Services() {
       details: 'Nuestro servicio de propiedad intelectual incluye: registro de marcas y patentes, protección de derechos de autor, contratos de licencia y franquicia, defensa contra infracciones, negociación de acuerdos de confidencialidad, y asesoría en propiedad intelectual para startups y emprendedores. Especializados en proteger tus activos intangibles.',
       color: 'purple',
     },
+    {
+      id: 'societario',
+      name: 'Derecho Societario',
+      icon: <Building2 size={48} />,
+      description: 'Constitución, fusiones, disoluciones y governance corporativo',
+      priceRange: '$250 - $550',
+      details: 'Nuestro servicio de derecho societario incluye: constitución de empresas, redacción de estatutos y reglamentos, asesoría en fusiones y adquisiciones, disolución y liquidación de sociedades, governance corporativo, conflictos entre accionistas, y asesoría en cambios de estructura empresarial. Acompañamos a emprendedores y empresas en cada etapa de su desarrollo.',
+      color: 'green',
+    },
   ];
 
   const getColorClasses = (color: string) => {
@@ -56,6 +65,7 @@ export default function Services() {
       blue: 'bg-blue-50 border-blue-200 text-blue-600',
       pink: 'bg-pink-50 border-pink-200 text-pink-600',
       purple: 'bg-purple-50 border-purple-200 text-purple-600',
+      green: 'bg-green-50 border-green-200 text-green-600',
     };
     return colors[color] || 'bg-gray-50 border-gray-200 text-gray-600';
   };

@@ -14,13 +14,13 @@ export default function ExpressConsultation() {
     {
       duration: '30' as const,
       minutes: '30 minutos',
-      price: 15,
+      price: 10,
       description: 'Consulta rápida para dudas específicas',
     },
     {
       duration: '90' as const,
       minutes: '1 hora 30 minutos',
-      price: 35,
+      price: 25,
       description: 'Consulta completa y detallada',
     },
   ];

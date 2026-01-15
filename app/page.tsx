@@ -3,6 +3,7 @@ import Hero from '@/components/Hero';
 import About from '@/components/About';
 import ExpressConsultation from '@/components/ExpressConsultation';
 import Services from '@/components/Services';
+import Lawyers from '@/components/Lawyers';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
 import Chatbot from '@/components/Chatbot';
@@ -15,6 +16,7 @@ export default function Home() {
       <About />
       <ExpressConsultation />
       <Services />
+      <Lawyers />
       <Contact />
       <Footer />
       <Chatbot />

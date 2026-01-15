@@ -1,11 +1,13 @@
 'use client';
 
-import { MessageCircle } from 'lucide-react';
+import { MessageCircle, PlayCircle } from 'lucide-react';
 import { useState } from 'react';
 import Image from 'next/image';
+import TutorialModal from './TutorialModal';
 
 export default function Hero() {
   const [showChatbot, setShowChatbot] = useState(false);
+  const [showTutorial, setShowTutorial] = useState(true);
   const [imageError, setImageError] = useState(false);
 
   const scrollToSection = (id: string) => {
@@ -52,12 +54,19 @@ export default function Hero() {
         <p className="text-lg md:text-xl mb-8 text-gray-200">
           Conectamos a personas con abogados especializados de manera rápida y accesible. Consultas legales a tu alcance, con profesionales certificados.
         </p>
-        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center flex-wrap">
           <button
             onClick={() => scrollToSection('servicios')}
             className="bg-white text-wine px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-all transform hover:scale-105 shadow-lg"
           >
             Ver Servicios
+          </button>
+          <button
+            onClick={() => setShowTutorial(true)}
+            className="bg-wine-light text-white px-8 py-3 rounded-lg font-semibold hover:bg-wine-dark transition-all transform hover:scale-105 shadow-lg flex items-center gap-2"
+          >
+            <PlayCircle size={20} />
+            Ver Tutorial
           </button>
           <button
             onClick={() => setShowChatbot(true)}
@@ -67,6 +76,8 @@ export default function Hero() {
             Iniciar Chat
           </button>
         </div>
+
+        <TutorialModal isOpen={showTutorial} onClose={() => setShowTutorial(false)} />
       </div>
     </section>
   );
