@@ -11,10 +11,10 @@ export default function TutorialModal({ isOpen, onClose }: TutorialModalProps) {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-2">
-      <div className="bg-white rounded-lg w-full h-[95vh] p-6 flex flex-col">
+    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4 pt-20">
+      <div className="bg-white rounded-lg w-full max-w-4xl h-[80vh] p-6 flex flex-col">
         <div className="flex justify-between items-center mb-4">
-          <h2 className="text-3xl font-bold text-wine">
+          <h2 className="text-2xl font-bold text-wine">
             Tutorial de la Plataforma
           </h2>
           <button
@@ -25,7 +25,7 @@ export default function TutorialModal({ isOpen, onClose }: TutorialModalProps) {
           </button>
         </div>
 
-        <p className="text-gray-600 mb-4 text-lg">
+        <p className="text-gray-600 mb-4 text-sm">
           Aprende cómo funciona EX LEGE-ON y cómo usar nuestros servicios:
         </p>
 
